@@ -98,6 +98,12 @@ void AudioInputTDM2Slave::config_tdm(void)
 	// index of the next bit received is one more than the current bit received. The value written must be greater
 	// than or equal to the word width when configured for MSB First. The value written must be less than or
 	// equal to 31-word width when configured for LSB First.
+
+	I2S2_TCR2 &= ~I2S_TCR2_MSEL(3)	//master clock select	//has no effect if bit clock and frame clock are provided from an extern source
+	& ~I2S_TCR2_BCD;		//bit clock direction: 1: master mode, 0: slave mode
+	I2S2_TCR4 &= ~I2S_TCR4_FSD;	//frame sync direction: 1->master mode, 0->slave mode
+	I2S2_RCR2 &= ~I2S_RCR2_BCD;					//Bit clock direction 1->master mode, 0->slave mode
+	I2S2_RCR4 &= ~I2S_RCR4_FSD;					//frame sync direction: 1->master mode, 0->slave mode
 }
 
 void AudioInputTDM2Slave::begin(void)
