@@ -70,8 +70,8 @@ void AudioInputTDM2Slave::config_tdm(void)
 	I2S2_TCR4 = I2S_TCR4_FRSZ(noChannels-1)
 		| I2S_TCR4_SYWD(noBitsM1)
 		| I2S_TCR4_MF	//most signifacant bit is sent first 
-		| I2S_TCR4_FSE	//frame sync early
-		| I2S_TCR4_FSP;	// Frame Sync Polarity
+		| I2S_TCR4_FSE;	//frame sync early
+		//| I2S_TCR4_FSP;	// Frame Sync Polarity: 0b - Frame sync is active high. 1b - Frame sync is active low.
 	I2S2_TCR5 = I2S_TCR5_WNW(noBitsM1)//word N width in bits
 	| I2S_TCR5_W0W(noBitsM1)//word 0 width in bits
 	| I2S_TCR5_FBT(15);		//First Bit Shifted
@@ -86,8 +86,8 @@ void AudioInputTDM2Slave::config_tdm(void)
 	I2S2_RCR4 = I2S_RCR4_FRSZ(noChannels-1)
 				| I2S_RCR4_SYWD(noBitsM1)
 				| I2S_RCR4_MF	//most signifacant bit is recieved first 
-				| I2S_RCR4_FSE	//frame sync early
-				| I2S_RCR4_FSP;	// Frame Sync Polarity: 0b - Frame sync is active high. 1b - Frame sync is active low.
+				| I2S_RCR4_FSE;	//frame sync early
+				//| I2S_RCR4_FSP;	// Frame Sync Polarity: 0b - Frame sync is active high. 1b - Frame sync is active low.
 	I2S2_RCR5 = I2S_RCR5_WNW(noBitsM1)
 				| I2S_RCR5_W0W(noBitsM1)
 				| I2S_RCR5_FBT(15);	// First Bit Shifted
